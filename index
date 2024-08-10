@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <style>
+      body {
+        font-family: 'Noto Serif KR', serif;
+        font-size: 16px; /* Font size */
+        color: #4a86e8; /* Font color */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #fff;
+        text-align: center;
+        flex-direction: column;
+      }
+      #passwordInput {
+        margin-top: 10px;
+      }
+      #passwordInput input {
+        font-family: 'Noto Serif KR', serif;
+        font-size: 16px;
+        padding: 5px;
+      }
+      #resultMessage {
+        margin-top: 10px;
+        color: #4a86e8; /* Keep "미감염" in the original color */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>제네시스 감염 여부</h2>
+    <div id="passwordInput">
+      <input type="text" id="password" placeholder="비밀번호를 입력하세요"> <!-- Changed to type="text" -->
+      <button onclick="checkPassword()">확인</button>
+    </div>
+    <p id="resultMessage"></p>
+
+    <script>
+      function checkPassword() {
+        google.script.run.withSuccessHandler(function(response) {
+          document.getElementById('resultMessage').innerText = response;
+        }).checkPassword(document.getElementById('password').value);
+      }
+    </script>
+  </body>
+</html>
